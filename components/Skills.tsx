@@ -3,9 +3,18 @@ import { motion } from "framer-motion";
 
 export default function Skills() {
   const categories = [
-    { title: "Machine Learning", skills: ["XGBoost", "Scikit-Learn", "FastAPI", "Optuna"] },
-    { title: "Advanced AI", skills: ["RLlib", "PPO", "RAG Pipelines", "NLP"] },
-    { title: "Engineering", skills: ["Python", "Docker", "PostgreSQL", "Git"] },
+    {
+      title: "Machine Learning",
+      skills: ["XGBoost", "Scikit-Learn", "FastAPI", "Optuna", "TensorFlow", "PyTorch"]
+    },
+    {
+      title: "Advanced AI",
+      skills: ["RLlib", "PPO", "RAG Pipelines", "NLP", "LangChain", "Vector DBs"]
+    },
+    {
+      title: "Engineering",
+      skills: ["Python", "Docker", "PostgreSQL", "Git", "React", "REST APIs"]
+    },
   ];
 
   return (
@@ -25,10 +34,15 @@ export default function Skills() {
             transition={{ delay: i * 0.1 }}
             className="portfolio-card text-center"
           >
-            <h3 className="text-xl font-bold mb-6 text-gray-800 border-b border-gray-100 pb-4">{cat.title}</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-xl font-bold mb-6 text-gray-200 border-b border-gray-700 pb-4">
+              {cat.title}
+            </h3>
+            <div className="flex flex-wrap gap-2 justify-center">
               {cat.skills.map((skill) => (
-                <span key={skill} className="text-gray-600 text-sm font-medium bg-gray-50 border border-gray-100 py-2 rounded-lg">
+                <span
+                  key={skill}
+                  className="px-3 py-2 text-sm font-medium bg-gray-700 border border-gray-600 rounded-lg hover:bg-purple-900 hover:border-purple-400 transition-colors cursor-default"
+                >
                   {skill}
                 </span>
               ))}

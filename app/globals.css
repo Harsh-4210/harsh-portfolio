@@ -9,41 +9,31 @@ html {
 }
 
 body {
-  /* BRIGHT BASE */
-  background-color: #ffffff;
-  color: #111827; /* Dark Gray text */
+  background-color: #111827;
+  color: #f9fafb;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* --- BRIGHT GLASS CARD --- */
+/* --- DARK GLASS CARD --- */
 .portfolio-card {
-  /* White with slight transparency */
-  background: rgba(255, 255, 255, 0.6);
-  
-  /* The Blur makes it look like frosted glass */
+  background: rgba(31, 41, 55, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  
-  /* Clean light gray border */
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
   padding: 2rem;
   transition: all 0.3s ease-out;
-  
-  /* Soft shadow to lift it off the white bg */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 .portfolio-card:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(31, 41, 55, 0.9);
   transform: translateY(-5px);
-  /* Stronger shadow on hover */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
-  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* TYPOGRAPHY */
@@ -52,20 +42,20 @@ body {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 3rem;
-  color: #111827; /* Near Black */
+  color: #f9fafb;
   letter-spacing: -0.03em;
 }
 
 .section-subtitle {
   text-align: center;
-  color: #6b7280; /* Gray-500 */
+  color: #9ca3af;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-bottom: 1rem;
 }
 
-/* --- ANIMATED PASTEL BACKGROUND (CSS ONLY - NO CRASHES) --- */
+/* --- ANIMATED BACKGROUND --- */
 .bright-mesh-bg {
   position: fixed;
   top: 0;
@@ -73,7 +63,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -10;
-  background: #ffffff;
+  background: #111827;
   pointer-events: none;
   overflow: hidden;
 }
@@ -84,14 +74,13 @@ body {
   content: '';
   position: absolute;
   filter: blur(80px);
-  opacity: 0.4; /* Subtle */
+  opacity: 0.2;
   border-radius: 50%;
   animation: float 10s infinite ease-in-out;
 }
 
-/* Blob 1: Soft Purple */
 .bright-mesh-bg::before {
-  background: #d8b4fe;
+  background: #7c3aed;
   width: 50vw;
   height: 50vw;
   top: -10%;
@@ -99,9 +88,8 @@ body {
   animation-delay: 0s;
 }
 
-/* Blob 2: Soft Blue */
 .bright-mesh-bg::after {
-  background: #bae6fd;
+  background: #3b82f6;
   width: 40vw;
   height: 40vw;
   bottom: 0%;
