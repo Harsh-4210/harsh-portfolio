@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* BRIGHT BASE */
+  background-color: #ffffff;
+  color: #111827; /* Dark Gray text */
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* --- BRIGHT GLASS CARD --- */
+.portfolio-card {
+  /* White with slight transparency */
+  background: rgba(255, 255, 255, 0.6);
+  
+  /* The Blur makes it look like frosted glass */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  /* Clean light gray border */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition: all 0.3s ease-out;
+  
+  /* Soft shadow to lift it off the white bg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.portfolio-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-5px);
+  /* Stronger shadow on hover */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* TYPOGRAPHY */
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: #111827; /* Near Black */
+  letter-spacing: -0.03em;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #6b7280; /* Gray-500 */
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+}
+
+/* --- ANIMATED PASTEL BACKGROUND (CSS ONLY - NO CRASHES) --- */
+.bright-mesh-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  background: #ffffff;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Glowing Blobs */
+.bright-mesh-bg::before,
+.bright-mesh-bg::after {
+  content: '';
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.4; /* Subtle */
+  border-radius: 50%;
+  animation: float 10s infinite ease-in-out;
+}
+
+/* Blob 1: Soft Purple */
+.bright-mesh-bg::before {
+  background: #d8b4fe;
+  width: 50vw;
+  height: 50vw;
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+/* Blob 2: Soft Blue */
+.bright-mesh-bg::after {
+  background: #bae6fd;
+  width: 40vw;
+  height: 40vw;
+  bottom: 0%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, 50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
 }
