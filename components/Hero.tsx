@@ -74,7 +74,7 @@ export default function Hero() {
         </a>
 
         <a
-          href="/Updated_Resume"
+          href="/New_Resume"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-bold hover:border-purple-400 transition-all shadow-sm hover:shadow-md"
