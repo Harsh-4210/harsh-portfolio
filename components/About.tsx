@@ -9,7 +9,7 @@ export default function About() {
 
         <div className="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-8 border border-gray-700 shadow-lg">
           <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-            I'm a results-driven second-year Artificial Intelligence and Data Science student at 
+            I'm a results-driven third-year Artificial Intelligence and Data Science student at 
             Savitribai Phule Pune University with a strong passion for building intelligent systems 
             that solve real-world problems. With hands-on experience in Python, C++, and web 
             development, I specialize in architecting scalable Machine Learning applications and 
