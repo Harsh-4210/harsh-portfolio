@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
-      {/* ANIMATED PROFILE PHOTO */}
+      {/* PROFILE PHOTO */}
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -29,7 +29,7 @@ export default function Hero() {
         transition={{ delay: 0.2 }}
         className="text-gray-400 font-bold mb-4 uppercase tracking-widest text-xs"
       >
-        Hello, I'm
+        Hello, I’m
       </motion.p>
 
       <motion.h1
@@ -47,7 +47,7 @@ export default function Hero() {
         transition={{ delay: 0.4 }}
         className="text-2xl md:text-3xl text-gray-300 font-medium mb-4"
       >
-        AI Engineer & ML Developer
+        Applied Machine Learning & AI Student
       </motion.h2>
 
       <motion.p
@@ -56,8 +56,8 @@ export default function Hero() {
         transition={{ delay: 0.5 }}
         className="text-gray-400 max-w-2xl mb-10 text-lg px-4"
       >
-        Building production-ready ML systems with expertise in reinforcement learning, 
-        RAG pipelines, and scalable APIs
+        Building end-to-end machine learning systems with scalable APIs, 
+        model optimization, and production-ready deployment using FastAPI and Docker.
       </motion.p>
 
       <motion.div

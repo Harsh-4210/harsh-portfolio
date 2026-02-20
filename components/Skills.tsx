@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 export default function Skills() {
   const categories = [
     {
-      title: "Machine Learning",
-      skills: ["XGBoost", "Scikit-Learn", "FastAPI", "Optuna", "TensorFlow", "PyTorch"]
+      title: "Core ML & Backend",
+      skills: ["Machine Learning", "Feature Engineering", "FastAPI", "REST APIs", "XGBoost", "Optuna"]
     },
     {
-      title: "Advanced AI",
-      skills: ["RLlib", "PPO", "RAG Pipelines", "NLP", "LangChain", "Vector DBs"]
+      title: "Data & Deployment",
+      skills: ["Docker", "PostgreSQL", "MongoDB", "ETL Pipelines", "Git"]
     },
     {
-      title: "Engineering",
-      skills: ["Python", "Docker", "PostgreSQL", "Git", "React", "REST APIs"]
-    },
+      title: "Additional Exposure",
+      skills: ["Deep Learning", "Reinforcement Learning (PPO)", "RAG Pipelines", "NLP", "React"]
+    }
   ];
 
   return (
@@ -38,10 +38,10 @@ export default function Skills() {
               {cat.title}
             </h3>
             <div className="flex flex-wrap gap-2 justify-center">
-              {cat.skills.map((skill) => (
+              {cat.skills.map(skill => (
                 <span
                   key={skill}
-                  className="px-3 py-2 text-sm font-medium bg-gray-700 border border-gray-600 rounded-lg hover:bg-purple-900 hover:border-purple-400 transition-colors cursor-default"
+                  className="px-3 py-2 text-sm font-medium bg-gray-700 border border-gray-600 rounded-lg"
                 >
                   {skill}
                 </span>

@@ -12,16 +12,16 @@ export default function Contact() {
         viewport={{ once: true }}
       >
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Let's Work Together
+          Let’s Work Together
         </h2>
         <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg">
-          Open to internships and ML engineering roles. Let's build something amazing!
+          Actively seeking internship opportunities in Machine Learning, AI, and backend-focused data engineering roles.
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 mb-12">
           <a
             href="mailto:harshjain0621@gmail.com"
-            className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-all shadow-lg hover:shadow-xl"
+            className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-all"
           >
             <Mail size={20} />
             Email Me
@@ -30,7 +30,7 @@ export default function Contact() {
             href="https://github.com/Harsh-4210"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium hover:border-purple-400 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium"
           >
             <Github size={20} />
             GitHub
@@ -39,7 +39,7 @@ export default function Contact() {
             href="https://www.linkedin.com/in/harsh-jain-853b31341/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium hover:border-purple-400 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium"
           >
             <Linkedin size={20} />
             LinkedIn

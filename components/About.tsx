@@ -9,25 +9,24 @@ export default function About() {
 
         <div className="bg-gray-800/60 backdrop-blur-lg rounded-2xl p-8 border border-gray-700 shadow-lg">
           <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-            I'm a results-driven third-year Artificial Intelligence and Data Science student at 
-            Savitribai Phule Pune University with a strong passion for building intelligent systems 
-            that solve real-world problems. With hands-on experience in Python, C++, and web 
-            development, I specialize in architecting scalable Machine Learning applications and 
-            deploying production-ready AI solutions.
+            I’m an Applied Machine Learning and AI student at Savitribai Phule Pune University with
+            hands-on experience building end-to-end ML systems and production-ready backend services.
+            I focus on developing ML pipelines, optimizing models, and deploying scalable APIs using
+            FastAPI and Docker.
           </p>
+
           <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-            My journey in AI/ML has led me to work on cutting-edge projects including multi-agent 
-            reinforcement learning systems, RAG-powered conversational interfaces, and optimized ML 
-            pipelines for emission prediction. I thrive on tackling complex technical challenges—from 
-            implementing PPO algorithms from scratch to optimizing model performance by 20-35% through 
-            feature engineering and hyperparameter tuning.
+            Through project-based work, I’ve built systems spanning emissions prediction, climate
+            data analytics, intelligent data exploration, and distributed ML workflows. My strengths
+            lie in clean system design, feature engineering, model evaluation, and performance
+            optimization for real-world use cases.
           </p>
+
           <p className="text-lg text-gray-300 leading-relaxed">
-            Currently maintaining an 8.75 GPA while actively contributing to collaborative projects 
-            using Agile methodology. I'm passionate about leveraging cutting-edge AI and Data Science 
-            technologies in scalable software engineering environments, and I'm actively seeking 
-            opportunities to work with innovative teams building the next generation of intelligent 
-            systems.
+            Currently maintaining a GPA of 8.75/10, I actively collaborate on engineering projects
+            and enjoy working in structured, team-oriented development environments. I’m seeking
+            internship opportunities in Machine Learning, AI, and backend-focused data engineering
+            roles where I can contribute to practical, scalable systems.
           </p>
         </div>
       </section>

@@ -4,53 +4,53 @@ import { Github } from "lucide-react";
 
 const projects = [
   {
-    title: "Multi-Agent Governance",
-    tech: "Reinforcement Learning (PPO), Python, RLlib",
-    description: "Self-evolving multi-agent system using PPO algorithm for complex decision-making scenarios",
+    title: "Multi-Agent Governance System",
+    tech: "Python, Ray RLlib, FastAPI, gRPC, PostgreSQL",
+    description: "Decentralized multi-agent RL system for autonomous decision-making.",
     highlights: [
-      "Implemented PPO from scratch",
-      "Achieved 85% convergence rate",
-      "Reduced training time by 40%"
+      "Improved convergence rate by ~30%",
+      "Built backend services for agent coordination",
+      "Implemented real-time monitoring dashboards"
     ],
     link: "https://github.com/Harsh-4210/Self_Evolving_Multi_Agent_Governance",
     color: "from-purple-500 to-indigo-600"
   },
   {
-    title: "ClimateX Platform",
-    tech: "React, Python, Data Analytics, Visualization",
-    description: "Interactive platform for climate data analysis with real-time visualization and predictive modeling",
+    title: "ClimateX – Climate Intelligence Platform",
+    tech: "Python, FastAPI, PostgreSQL, MongoDB, ETL",
+    description: "Backend platform for climate data ingestion and analytics.",
     highlights: [
-      "Processed 100K+ data points",
-      "Built interactive dashboards",
-      "Integrated ML forecasting models"
+      "Processed 100K+ climate records",
+      "Designed dual-database architecture",
+      "Built ETL pipelines"
     ],
     link: "https://github.com/Viraj281105/ClimateX",
     color: "from-emerald-400 to-teal-500"
   },
   {
-    title: "FloatChat (RAG AI)",
-    tech: "RAG Pipeline, LLM, NLP, React, Vector DB",
-    description: "Retrieval-Augmented Generation chatbot with context-aware responses and document processing",
+    title: "FloatChat – AI Data Explorer",
+    tech: "Python, FastAPI, RAG, Supabase",
+    description: "Natural-language interface for large-scale data exploration.",
     highlights: [
-      "Implemented semantic search",
-      "Response time <2 seconds",
-      "Supports multiple file formats"
+      "Implemented RAG pipeline",
+      "Reduced API response time by ~35%",
+      "Designed scalable REST APIs"
     ],
     link: "https://github.com/Viraj281105/FloatChat",
     color: "from-orange-400 to-red-500"
   },
   {
-    title: "SO₂ Emission Prediction",
-    tech: "XGBoost, Optuna, FastAPI, Docker",
-    description: "ML model for predicting industrial emissions with hyperparameter optimization and API deployment",
+    title: "SO₂ Emission Prediction System",
+    tech: "Python, FastAPI, XGBoost, Optuna, Docker",
+    description: "ML system for predicting SO₂ emissions from power plants.",
     highlights: [
-      "92% prediction accuracy",
-      "Deployed with FastAPI",
-      "Containerized with Docker"
+      "Achieved ~85% test accuracy",
+      "Applied Optuna-based tuning",
+      "Deployed Dockerized ML API"
     ],
     link: "https://github.com/PurveshMali/PBL",
     color: "from-cyan-400 to-blue-500"
-  },
+  }
 ];
 
 export default function Projects() {
@@ -69,32 +69,21 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="portfolio-card flex flex-col group"
+            className="portfolio-card flex flex-col"
           >
-            {/* Colorful Image Placeholder */}
-            <div
-              className={`w-full h-48 bg-gradient-to-br ${p.color} rounded-xl mb-6 flex items-center justify-center shadow-md group-hover:scale-[1.02] transition-transform duration-500`}
-            >
-              <span className="text-white font-bold text-lg drop-shadow-md">
+            <div className={`w-full h-48 bg-gradient-to-br ${p.color} rounded-xl mb-6 flex items-center justify-center`}>
+              <span className="text-white font-bold text-lg">
                 {p.title}
               </span>
             </div>
 
-            <h3 className="text-2xl font-bold mb-2 text-white">
-              {p.title}
-            </h3>
-            <p className="text-sm text-gray-400 font-medium mb-3">
-              {p.tech}
-            </p>
-            <p className="text-gray-300 mb-4">
-              {p.description}
-            </p>
+            <h3 className="text-2xl font-bold mb-2 text-white">{p.title}</h3>
+            <p className="text-sm text-gray-400 mb-3">{p.tech}</p>
+            <p className="text-gray-300 mb-4">{p.description}</p>
 
-            <ul className="space-y-1 mb-6 flex-grow">
-              {p.highlights.map((highlight, idx) => (
-                <li key={idx} className="text-sm text-gray-400">
-                  • {highlight}
-                </li>
+            <ul className="space-y-1 mb-6">
+              {p.highlights.map((h, idx) => (
+                <li key={idx} className="text-sm text-gray-400">• {h}</li>
               ))}
             </ul>
 
