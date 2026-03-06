@@ -1,5 +1,6 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import InteractiveBackground from "@/components/InteractiveBackground";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider>
-          <div className="bright-mesh-bg" />
+          <InteractiveBackground />
           <Navbar />
           <main>
             <Hero />

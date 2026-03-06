@@ -130,7 +130,7 @@ export default function Hero() {
             Get In Touch
           </a>
           <a
-            href="/New_Resume"
+            href="/New_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"

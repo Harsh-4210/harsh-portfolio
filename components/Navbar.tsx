@@ -118,7 +118,7 @@ export default function Navbar() {
 
             {/* Resume */}
             <a
-              href="/resume.pdf"
+              href="/New_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary ml-2 !py-1.5 !px-4 !text-xs"
@@ -176,7 +176,7 @@ export default function Navbar() {
               </motion.button>
             ))}
             <a
-              href="/resume.pdf"
+              href="/New_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary mt-2"
