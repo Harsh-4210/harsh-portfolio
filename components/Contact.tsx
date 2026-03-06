@@ -1,55 +1,98 @@
 "use client";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+
+const links = [
+  {
+    icon: Mail,
+    label: "harshjain0621@gmail.com",
+    href: "mailto:harshjain0621@gmail.com",
+    external: false,
+  },
+  {
+    icon: Github,
+    label: "github.com/Harsh-4210",
+    href: "https://github.com/Harsh-4210",
+    external: true,
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/harsh-jain-853b31341/",
+    external: true,
+  },
+];
 
 export default function Contact() {
   return (
-    <footer id="contact" className="py-24 max-w-4xl mx-auto px-6 text-center border-t border-gray-800 mt-12">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          Let’s Work Together
-        </h2>
-        <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg">
-          Actively seeking internship opportunities in Machine Learning, AI, and backend-focused data engineering roles.
-        </p>
+    <footer id="contact" className="py-24 px-6">
+      <div className="max-w-3xl mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <p className="section-subtitle">Contact</p>
+          <h2 className="section-title">Let&apos;s Connect</h2>
+          <div className="section-divider" />
 
-        <div className="flex flex-wrap justify-center gap-6 mb-12">
-          <a
-            href="mailto:harshjain0621@gmail.com"
-            className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-all"
+          <p
+            className="max-w-md mx-auto text-base leading-relaxed mb-10"
+            style={{ color: "var(--text-secondary)" }}
           >
-            <Mail size={20} />
-            Email Me
+            I&apos;m actively seeking internship opportunities in Machine Learning, AI, and backend-focused data engineering. Feel free to reach out.
+          </p>
+
+          {/* Primary CTA */}
+          <a href="mailto:harshjain0621@gmail.com" className="btn-primary inline-flex mb-10">
+            <Mail size={16} />
+            Send an Email
           </a>
-          <a
-            href="https://github.com/Harsh-4210"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium"
-          >
-            <Github size={20} />
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/harsh-jain-853b31341/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white border-2 border-gray-700 rounded-full font-medium"
-          >
-            <Linkedin size={20} />
-            LinkedIn
-          </a>
+
+          {/* Links */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            {links.map(({ icon: Icon, label, href, external }) => (
+              <a
+                key={label}
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200"
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--text-secondary)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--accent-border)";
+                  e.currentTarget.style.backgroundColor = "var(--accent-bg)";
+                  e.currentTarget.style.color = "var(--accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--text-secondary)";
+                }}
+              >
+                <Icon size={16} />
+                {label}
+                {external && <ArrowUpRight size={12} />}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <div
+          className="pt-8 text-xs"
+          style={{
+            borderTop: "1px solid var(--border)",
+            color: "var(--text-muted)",
+          }}
+        >
+          <p>&copy; {new Date().getFullYear()} Harsh Jain. Built with Next.js & Tailwind CSS.</p>
         </div>
-
-        <p className="mt-16 text-gray-400 text-sm">
-          © {new Date().getFullYear()} Harsh Jain. Built with React & Tailwind CSS
-        </p>
-      </motion.div>
+      </div>
     </footer>
   );
 }

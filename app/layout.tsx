@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -9,7 +10,8 @@ import Contact from "@/components/Contact";
 
 export const metadata = {
   title: "Harsh Jain | AI Engineer & ML Developer",
-  description: "Portfolio of Harsh Jain - AI Engineer specializing in Machine Learning, Reinforcement Learning, and Production ML Systems",
+  description:
+    "Portfolio of Harsh Jain - AI Engineer specializing in Machine Learning, Reinforcement Learning, and Production ML Systems",
 };
 
 export default function RootLayout({
@@ -18,20 +20,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-gray-900 text-white">
-        {/* Animated Background */}
-        <div className="bright-mesh-bg"></div>
-        
-        <main>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider>
+          <div className="bright-mesh-bg" />
           <Navbar />
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Contact />
-        </main>
+          <main>
+            <Hero />
+            <About />
+            <Experience />
+            <Projects />
+            <Skills />
+            <Contact />
+          </main>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
