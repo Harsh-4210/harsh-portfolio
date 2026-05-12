@@ -176,7 +176,7 @@ export default function Navbar() {
               </motion.button>
             ))}
             <a
-              href="/New_Resume.pdf"
+              href="/HARSH_JAIN_RESUME"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary mt-2"
