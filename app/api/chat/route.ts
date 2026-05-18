@@ -13,12 +13,13 @@ const CHAT_TIMEOUT_MS = 5_000;
 const HISTORY_LIMIT = 4;
 const MAX_TOKENS = 220;
 
-class GeminiError extends Error {
+class OpenRouterError extends Error {
   constructor(
     readonly status: number,
     readonly body: string,
+    readonly retryAfter: string | null
   ) {
-    super(`Gemini API Error ${status}: ${body}`);
+    super(`OpenRouter ${status}: ${body}`);
   }
 }
 
@@ -69,49 +70,49 @@ Building RAG Systems with LangChain by deeplearning.ai.
 LLM Fundamentals by Hugging Face.
 100 Days of Code: The Complete Python Pro Bootcamp by Udemy.`;
 
-type GeminiMessage = {
-  role: "user" | "model";
-  parts: { text: string }[];
+type OpenRouterMessage = {
+  role: "system" | "user" | "assistant";
+  content: string;
 };
 
-async function callGemini(
-  messages: GeminiMessage[],
-  systemInstruction: string,
-  apiKey: string
+async function callOpenRouter(
+  messages: OpenRouterMessage[],
+  apiKey: string,
+  model: string
 ) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), CHAT_TIMEOUT_MS);
 
   try {
-    // We use gemini-1.5-flash as it is fast and free tier friendly
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-    
-    const res = await fetch(url, {
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       signal: controller.signal,
       headers: {
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
+        "HTTP-Referer": "https://harsh-portfolio.vercel.app",
+        "X-Title": "Harsh Jain Portfolio",
       },
       body: JSON.stringify({
-        system_instruction: {
-          parts: { text: systemInstruction }
+        model,
+        provider: {
+          allow_fallbacks: true,
+          sort: "latency",
         },
-        contents: messages,
-        generationConfig: {
-          temperature: 0.35,
-          maxOutputTokens: MAX_TOKENS,
-          topP: 0.85,
-        },
+        messages,
+        temperature: 0.35,
+        max_tokens: MAX_TOKENS,
+        top_p: 0.85,
       }),
     });
 
     if (!res.ok) {
       const err = await res.text();
-      throw new GeminiError(res.status, err);
+      throw new OpenRouterError(res.status, err, res.headers.get("Retry-After"));
     }
 
     const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text ?? null;
+    return data.choices?.[0]?.message?.content ?? null;
   } finally {
     clearTimeout(timeout);
   }
@@ -203,7 +204,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ reply: instantReply });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -214,26 +215,31 @@ export async function POST(req: NextRequest) {
 
     const pastMessages = Array.isArray(history) ? history : [];
 
-    const messages: GeminiMessage[] = [
+    const messages: OpenRouterMessage[] = [
+      { role: "system", content: SYSTEM_PROMPT },
       ...pastMessages
         .slice(-HISTORY_LIMIT)
         .map((item: { role?: string; content?: string }) => ({
-          role: item.role === "assistant" ? "model" as const : "user" as const,
-          parts: [{ text: String(item.content ?? "").slice(0, 600) }],
+          role: item.role === "assistant" ? "assistant" as const : "user" as const,
+          content: String(item.content ?? "").slice(0, 600),
         }))
-        .filter((item) => item.parts[0].text.trim().length > 0),
-      { role: "user", parts: [{ text: message.trim().slice(0, 600) }] },
+        .filter((item) => item.content.trim().length > 0),
+      { role: "user", content: message.trim().slice(0, 600) },
     ];
 
     let reply: string | null = null;
 
-    try {
-      reply = await callGemini(messages, SYSTEM_PROMPT, apiKey);
-    } catch (error) {
-      if (error instanceof GeminiError) {
-        console.warn(`Gemini model failed with ${error.status}.`, error.body);
-      } else {
-        console.warn(`Gemini API error:`, error);
+    for (const model of OPENROUTER_MODEL_CHAIN) {
+      try {
+        reply = await callOpenRouter(messages, apiKey, model);
+        if (reply) break;
+      } catch (error) {
+        if (error instanceof OpenRouterError) {
+          const retryMessage = error.retryAfter ? ` Retry-After: ${error.retryAfter}s.` : "";
+          console.warn(`OpenRouter model failed (${model}) with ${error.status}.${retryMessage}`, error.body);
+        } else {
+          console.warn(`OpenRouter model failed (${model}):`, error);
+        }
       }
     }
 
