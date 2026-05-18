@@ -115,9 +115,9 @@ const Footer = () => (
         ].map((link) => (
           <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
             className="font-code-label text-code-label"
-            style={{ color: "var(--on-tertiary-fixed-variant)", textDecoration: "none", transition: "color 0.3s" }}
+            style={{ color: "var(--on-surface-variant)", textDecoration: "none", transition: "color 0.3s" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--primary)")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--on-tertiary-fixed-variant)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--on-surface-variant)")}
           >{link.label}</a>
         ))}
       </div>
@@ -272,7 +272,7 @@ export default function ProjectsPage() {
                             fontFamily: "'Inter', sans-serif",
                             fontSize: "24px",
                             fontWeight: 700,
-                            color: "white",
+                            color: "var(--on-surface)",
                           }}
                         >
                           {stat.value}
@@ -378,7 +378,7 @@ export default function ProjectsPage() {
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "18px",
                     fontWeight: 700,
-                    color: "white",
+                    color: "var(--on-surface)",
                     marginBottom: "16px",
                   }}
                 >

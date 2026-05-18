@@ -69,10 +69,14 @@ function InteractiveGlobe() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [autoRotate, setAutoRotate] = useState(true);
-  const animRef = useRef<number>(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const rotRef = useRef({ x: 10, y: 0 });
-
+  const animRef = useRef<number>(0);
   const SPHERE_R = 170;
+
+  // Dense Wireframe grid
+  const LATITUDES = Array.from({ length: 17 }, (_, i) => -80 + i * 10);
+  const LONGITUDES = Array.from({ length: 18 }, (_, i) => i * 10);
 
   useEffect(() => {
     const tick = () => {
@@ -143,7 +147,7 @@ function InteractiveGlobe() {
         }}
       >
         {/* Latitude Lines */}
-        {[-60, -30, 0, 30, 60].map((lat, i) => {
+        {LATITUDES.map((lat, i) => {
           const r = SPHERE_R * Math.cos((lat * Math.PI) / 180);
           const y = SPHERE_R * Math.sin((lat * Math.PI) / 180);
           const isEquator = lat === 0;
@@ -158,14 +162,14 @@ function InteractiveGlobe() {
                 height: `${r * 2}px`,
                 borderRadius: "50%",
                 border: `1px solid var(--outline)`,
-                opacity: isEquator ? 0.2 : 0.08,
+                opacity: isEquator ? 0.3 : 0.15,
                 transform: `translateY(${y}px) rotateX(90deg)`,
               }}
             />
           );
         })}
         {/* Longitude Lines */}
-        {[0, 30, 60, 90, 120, 150].map((lon, i) => {
+        {LONGITUDES.map((lon, i) => {
           const isPrime = lon === 0 || lon === 90;
           return (
             <div
@@ -178,7 +182,7 @@ function InteractiveGlobe() {
                 height: `${SPHERE_R * 2}px`,
                 borderRadius: "50%",
                 border: `1px solid var(--outline)`,
-                opacity: isPrime ? 0.2 : 0.08,
+                opacity: isPrime ? 0.3 : 0.15,
                 transform: `rotateY(${lon}deg)`,
               }}
             />
