@@ -1,39 +1,30 @@
+import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import InteractiveBackground from "@/components/InteractiveBackground";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-export const metadata = {
-  title: "Harsh Jain | AI Engineer & ML Developer",
+export const metadata: Metadata = {
+  title: "Harsh Jain | ML & AI Engineer",
   description:
-    "Portfolio of Harsh Jain - AI Engineer specializing in Machine Learning, Reinforcement Learning, and Production ML Systems",
+    "Portfolio of Harsh Jain — Applied ML student building end-to-end RL systems, LLM fine-tuning pipelines, and production-ready backend services.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body style={{ background: "var(--bg)", color: "var(--on-surface)" }}>
         <ThemeProvider>
-          <InteractiveBackground />
           <Navbar />
-          <main>
-            <Hero />
-            <About />
-            <Experience />
-            <Projects />
-            <Skills />
-            <Contact />
-          </main>
           {children}
         </ThemeProvider>
       </body>

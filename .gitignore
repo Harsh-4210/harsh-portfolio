@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.env.local
+
+# custom ignores
+.vscode/
+*.log
+files/
+resume_extracted.txt

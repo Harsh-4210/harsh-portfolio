@@ -2,7 +2,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
-
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
@@ -19,20 +18,29 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.classList.toggle("dark", stored === "dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
+    const stored = localStorage.getItem("hj-theme") as Theme | null;
+    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    const resolved = stored ?? preferred;
+    setTheme(resolved);
+    applyTheme(resolved);
   }, []);
 
+  const applyTheme = (t: Theme) => {
+    const root = document.documentElement;
+    root.classList.remove("dark", "light");
+    root.classList.add(t);
+    root.style.colorScheme = t;
+  };
+
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+    setTheme((prev) => {
+      const next = prev === "dark" ? "light" : "dark";
+      localStorage.setItem("hj-theme", next);
+      applyTheme(next);
+      return next;
+    });
   };
 
   if (!mounted) return null;
