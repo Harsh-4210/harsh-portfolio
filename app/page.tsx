@@ -320,7 +320,7 @@ export default function HomePage() {
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "24px",
                         fontWeight: 700,
-                        color: "white",
+                        color: "var(--on-surface)",
                         letterSpacing: "-0.01em",
                       }}
                     >
@@ -759,7 +759,7 @@ export default function HomePage() {
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "40px",
                   fontWeight: 800,
-                  color: "white",
+                  color: "var(--on-surface)",
                   lineHeight: 1.2,
                   marginBottom: "24px",
                 }}
@@ -786,7 +786,8 @@ export default function HomePage() {
                     style={{
                       padding: "8px 16px",
                       borderRadius: "999px",
-                      color: "white",
+                      color: "var(--on-surface)",
+                      border: "1px solid var(--outline)",
                     }}
                   >
                     {tag}
@@ -822,10 +823,10 @@ export default function HomePage() {
                 style={{
                   position: "absolute",
                   bottom: "16px",
-                  color: "rgba(255,255,255,0.5)",
+                  color: "var(--on-surface-variant)",
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: "12px",
-                  background: "rgba(0,0,0,0.6)",
+                  background: "var(--surface)",
                   padding: "4px 8px",
                   borderRadius: "8px",
                   backdropFilter: "blur(4px)",
@@ -841,8 +842,8 @@ export default function HomePage() {
       {/* Footer */}
       <footer
         style={{
-          background: "rgba(0,0,0,0.5)",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
+          background: "var(--surface)",
+          borderTop: "1px solid var(--outline)",
           backdropFilter: "blur(20px)",
           marginTop: "80px",
         }}
