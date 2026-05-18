@@ -129,8 +129,7 @@ function InteractiveGlobe() {
     >
       {/* Glow */}
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "280px", height: "280px", borderRadius: "50%", background: theme === "light" ? "radial-gradient(circle, rgba(109,40,217,0.06) 0%, transparent 70%)" : "radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
-      {/* Globe outline and Orbit Lines */}
-      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: `${SPHERE_R * 2}px`, height: `${SPHERE_R * 2}px`, borderRadius: "50%", border: "1px solid var(--outline-variant)", pointerEvents: "none" }} />
+      {/* 3D Wireframe Skeleton */}
       <div
         style={{
           position: "absolute",
@@ -157,8 +156,8 @@ function InteractiveGlobe() {
                 width: `${r * 2}px`,
                 height: `${r * 2}px`,
                 borderRadius: "50%",
-                border: "1px dashed var(--outline-variant)",
-                opacity: 0.25,
+                border: "1px solid var(--primary)",
+                opacity: 0.15,
                 transform: `translateY(${y}px) rotateX(90deg)`,
               }}
             />
@@ -175,8 +174,8 @@ function InteractiveGlobe() {
               width: `${SPHERE_R * 2}px`,
               height: `${SPHERE_R * 2}px`,
               borderRadius: "50%",
-              border: "1px dashed var(--outline-variant)",
-              opacity: 0.25,
+              border: "1px solid var(--primary)",
+              opacity: 0.15,
               transform: `rotateY(${lon}deg)`,
             }}
           />
