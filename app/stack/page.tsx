@@ -127,8 +127,8 @@ function InteractiveGlobe() {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {/* Glow */}
-      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "280px", height: "280px", borderRadius: "50%", background: theme === "light" ? "radial-gradient(circle, rgba(109,40,217,0.06) 0%, transparent 70%)" : "radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+      {/* Volumetric Atmosphere Glow */}
+      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: `${SPHERE_R * 2}px`, height: `${SPHERE_R * 2}px`, borderRadius: "50%", background: theme === "light" ? "radial-gradient(circle at 30% 30%, rgba(109,40,217,0.04) 0%, transparent 70%)" : "radial-gradient(circle at 30% 30%, rgba(124,58,237,0.05) 0%, transparent 70%)", boxShadow: "inset -10px -10px 40px rgba(0,0,0,0.02)", pointerEvents: "none" }} />
       {/* 3D Wireframe Skeleton */}
       <div
         style={{
@@ -146,6 +146,7 @@ function InteractiveGlobe() {
         {[-60, -30, 0, 30, 60].map((lat, i) => {
           const r = SPHERE_R * Math.cos((lat * Math.PI) / 180);
           const y = SPHERE_R * Math.sin((lat * Math.PI) / 180);
+          const isEquator = lat === 0;
           return (
             <div
               key={`lat-${i}`}
@@ -156,30 +157,33 @@ function InteractiveGlobe() {
                 width: `${r * 2}px`,
                 height: `${r * 2}px`,
                 borderRadius: "50%",
-                border: "1px solid var(--primary)",
-                opacity: 0.15,
+                border: `1px solid var(--outline)`,
+                opacity: isEquator ? 0.2 : 0.08,
                 transform: `translateY(${y}px) rotateX(90deg)`,
               }}
             />
           );
         })}
         {/* Longitude Lines */}
-        {[0, 30, 60, 90, 120, 150].map((lon, i) => (
-          <div
-            key={`lon-${i}`}
-            style={{
-              position: "absolute",
-              top: -SPHERE_R,
-              left: -SPHERE_R,
-              width: `${SPHERE_R * 2}px`,
-              height: `${SPHERE_R * 2}px`,
-              borderRadius: "50%",
-              border: "1px solid var(--primary)",
-              opacity: 0.15,
-              transform: `rotateY(${lon}deg)`,
-            }}
-          />
-        ))}
+        {[0, 30, 60, 90, 120, 150].map((lon, i) => {
+          const isPrime = lon === 0 || lon === 90;
+          return (
+            <div
+              key={`lon-${i}`}
+              style={{
+                position: "absolute",
+                top: -SPHERE_R,
+                left: -SPHERE_R,
+                width: `${SPHERE_R * 2}px`,
+                height: `${SPHERE_R * 2}px`,
+                borderRadius: "50%",
+                border: `1px solid var(--outline)`,
+                opacity: isPrime ? 0.2 : 0.08,
+                transform: `rotateY(${lon}deg)`,
+              }}
+            />
+          );
+        })}
       </div>
 
       {nodes.map((n) => {
