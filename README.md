@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# harsh-portfolio
 
-## Getting Started
+Personal site of Harsh Jain. Next.js (App Router), Tailwind CSS v4 and Motion; every page is statically rendered. Layout inspired by the CodeBucks minimal Next.js portfolio, with a muted palette.
 
-First, run the development server:
+## Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+app/
+  page.tsx                  home: portrait, headline, résumé and contact
+  about/page.tsx            biography, counters, skills map, experience timeline
+  projects/page.tsx         featured case studies and other work
+  projects/[slug]/page.tsx  case studies, generated at build time
+  globals.css               theme tokens; dark mode is class-based with a toggle
+components/                 Navbar (theme toggle, mobile menu), Footer, Section, Visuals, Icons
+lib/content.ts              every piece of copy on the site
+public/                     résumé PDF and portrait
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+All content lives in `lib/content.ts`. Adding a case study means adding an entry to `caseStudies`; the route is generated automatically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content rule
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Every number on the site must be reproducible from a public repo, training log or demo. If it can't be, it doesn't go in.
 
-## Learn More
+## Develop
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`npm run build` produces a fully static build.
