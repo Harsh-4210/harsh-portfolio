@@ -45,15 +45,15 @@ export const profile = {
   location: "Pune, India",
   email: "harshjain0621@gmail.com",
   intro:
-    "I build training environments, reward functions, and evaluation harnesses for language models, and the backend services that put them in front of users.",
+    "I build training environments and evaluation harnesses for language models, evidence-backed AI applications, and tools for reviewing coding agents.",
   focus:
-    "Most of my recent work comes back to one question: how do you get a small model to make a decision that a program can check?",
+    "My recent work spans ConflictBench, InsureClear and Drishya: making model decisions checkable, appeal drafts reviewable, and agent work visible.",
   availability:
     "Final-year B.E. student in AI & Data Science. Open to ML engineering internships and 2027 full-time roles.",
   headline: "I train small models to make decisions you can verify.",
   bio: [
     "I'm a final-year AI & Data Science student at Savitribai Phule Pune University. Most of what I build sits where research meets shipping: an environment and reward function on one side, an API someone can actually call on the other.",
-    "Lately that has meant post-training language models with GRPO and LoRA, designing deterministic verifiers so the reward cannot be gamed by an LLM judge, and building multi-agent pipelines with a quality gate before anything reaches a user.",
+    "Lately that has meant redesigning ConflictBench around deterministic evaluation, building evidence and human approval into InsureClear, and creating Drishya to watch coding agents and review their changes locally.",
     "I care about evaluation more than demos. Every number on this site comes from a public repo, a training log or a live demo, and each case study ends with what did not work.",
   ],
   stats: [
@@ -71,84 +71,167 @@ export const profile = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "conflictbench",
-    title: "ConflictBench",
-    tagline:
-      "An RL environment that trains a 3B language model to resolve contradictory business instructions.",
-    year: "2026",
-    role: "Solo · Top 100 finalist, Meta × PyTorch × Hugging Face OpenEnv Hackathon",
-    kind: "RL environment · LLM post-training",
-    highlight: "Composite reward 0.14 → 0.50 on a deterministic, five-rubric verifier",
-    pipeline: ["Conflicting directives", "JSON plan", "Deterministic verifier", "Reward", "GRPO + LoRA"],
-    stack: ["Python", "TRL (GRPO)", "Unsloth", "LoRA", "Qwen2.5-3B", "OpenEnv", "FastAPI", "Gradio", "W&B"],
-    problem:
-      "Legal, executives, VPs and team leads routinely send instructions that contradict each other. Asked to plan from such a document, language models trust the latest or longest message, try to satisfy both sides of a contradiction, or return prose that no program can execute.",
-    approach: [
-      "A scenario generator builds documents of 6–16 directives with 2–6 embedded conflict pairs across ten business domains (hiring, deployments, budgets and others), each with a ground-truth resolution.",
-      "A deterministic verifier, with no LLM judge, scores each plan on five rubrics: final-state correctness (0.35), freedom from contradictions (0.25), conflict-pair F1 (0.20), efficiency (0.10) and JSON-schema compliance (0.10).",
-      "The authority ranking is stated in the prompt. What the model has to learn is applying it across a messy document and returning one executable JSON plan.",
-      "Trained Qwen2.5-3B (4-bit, Unsloth) with GRPO and LoRA on 400 scenarios for two epochs. The environment is served over the OpenEnv HTTP interface (/reset, /step, /state).",
+    "slug": "drishya",
+    "title": "Drishya",
+    "tagline": "A local workspace to watch coding agents live, replay their sessions, and review the code they change.",
+    "year": "2026",
+    "role": "Creator",
+    "kind": "Developer tools · Agent observability",
+    "highlight": "Live activity, session replay, branch and PR review across Claude Code, Codex and Antigravity",
+    "pipeline": [
+      "Agent sessions",
+      "Local capture",
+      "Secret redaction",
+      "Live workspace",
+      "Review + replay"
     ],
-    result:
-      "Composite reward rose from 0.14 for the untouched base model to 0.50 at the best checkpoint. The largest gains were in following the correct instructions and naming the conflicts.",
-    metrics: {
-      caption: "Verifier scores (0–1) on held-out scenarios from the same generator. Base: untouched model. Best: published checkpoint. Final: last step of the run.",
-      columns: ["Base", "Best", "Final"],
-      rows: [
-        { label: "Composite", start: "0.14", best: "0.50", end: "0.48" },
-        { label: "Follows the right instructions", start: "0.11", best: "0.48", end: "0.46" },
-        { label: "No contradictions", start: "0.31", best: "0.74", end: "0.71" },
-        { label: "Finds the conflicts", start: "0.08", best: "0.39", end: "0.37" },
-        { label: "Plan efficiency", start: "0.62", best: "0.71", end: "0.70" },
-        { label: "Valid JSON", start: "0.65", best: "0.88", end: "0.89" },
-      ],
-    },
-    limitations: [
-      "One training run. Evaluation scenarios come from the same ten templates as training, so this measures in-distribution skill, not transfer to real company documents.",
-      "Conflict detection peaks at 0.39: the model still misses most conflicts.",
-      "The KL penalty was loose. Reward peaked near step 250 and then drifted, so the published adapter is the peak checkpoint, not the last one.",
-      "The 0.50 run resumed from an earlier short run that already scored about 0.37; 0.14 is the untouched base model.",
+    "stack": [
+      "TypeScript",
+      "Node.js 24",
+      "React",
+      "Vite",
+      "CodeMirror",
+      "SQLite",
+      "Vitest",
+      "Playwright"
     ],
-    next: [
-      "Hold out entire conflict domains to measure transfer.",
-      "Remove the ranking from the prompt and test whether the model can recover it from reward alone.",
+    "problem": "Coding agents read files, run commands and edit code across separate tools. A final summary leaves out the evidence needed to understand their decisions and review the result.",
+    "approach": [
+      "Capture reads, searches, commands, tests and edits as they happen, showing actual files, output and diffs beside the repository.",
+      "Bring Claude Code, Codex and Antigravity sessions into one Home with replay and search over opened sessions. Show when reasoning was not recorded rather than inventing it.",
+      "Keep Workspace, branch and pull-request Changes, and the Git graph next to the session, with attribution showing which agent touched each file.",
+      "Let users answer questions and approvals and send follow-up prompts to Claude Code and Codex. Antigravity currently supports live view and replay.",
+      "Run locally with no telemetry and redact secrets before storage. Separate capture, ingestion, projection, privacy and agent adapters into workspace packages."
     ],
-    links: [
-      { label: "Source", href: "https://github.com/Harsh-4210/Conflict_Bench" },
-      { label: "Live demo", href: "https://huggingface.co/spaces/Harsh-9209/Conflict_Bench" },
-      { label: "LoRA adapter", href: "https://huggingface.co/Harsh-9209/conflictbench-qwen2.5-3b-grpo-lora" },
+    "result": "A working local review workspace with live agent activity, session history, code review and a packaged CLI. The public website shows the product and its review workflow.",
+    "limitations": [
+      "Antigravity does not support sending prompts; T3 Code and Hermes Agent are exploratory integrations.",
+      "Session visibility depends on what each agent records. Missing reasoning is explicitly labelled."
     ],
+    "next": [
+      "Expand agent integrations while preserving accurate capture and local privacy boundaries."
+    ],
+    "links": [
+      {
+        "label": "Source",
+        "href": "https://github.com/drishya-dev/drishya"
+      },
+      {
+        "label": "Website",
+        "href": "https://drishya-dev.github.io/drishya/"
+      }
+    ]
   },
   {
-    slug: "insureclear",
-    title: "InsureClear",
-    tagline:
-      "A multi-agent pipeline that turns a rejected Indian health-insurance claim into a reviewable appeal.",
-    year: "2026",
-    role: "Solo",
-    kind: "Multi-agent LLM pipeline",
-    highlight: "Five agents, a judge gate at 0.75, up to two revisions, restart-safe job queue",
-    pipeline: ["Denial + policy", "Auditor", "Policy analyst", "IRDAI checker", "Writer", "Judge ≥ 0.75"],
-    stack: ["Python", "Gemini", "FastAPI", "React", "SQLite", "Docker", "pytest"],
-    problem:
-      "A claim-denial letter mixes facts, policy clauses and conclusions. Challenging one means reading the policy against IRDAI regulations and knowing the escalation path, which most claimants cannot do on their own.",
-    approach: [
-      "Five agents run in sequence: an Auditor extracts a structured case snapshot; a Policy Analyst looks for exclusions, limits, waiting periods and counter-arguments; an IRDAI Checker attaches regulatory leads; an Appeal Writer drafts; a Judge scores.",
-      "If the Judge scores a draft below 0.75, it returns concrete changes and the writer revises, up to two times, before the package is produced.",
-      "A FastAPI job API (POST /api/analyze, GET /api/jobs/{id}) runs on a SQLite-backed queue with checkpoints, so named cases survive a restart. The React client shows per-agent progress, the judge scorecard and the revision state.",
-      "Uploaded PDFs are deleted after processing. Every regulatory citation carries a manual-verification flag, and the letter is meant to be reviewed by a person before it is sent.",
+    "slug": "conflictbench",
+    "title": "ConflictBench",
+    "tagline": "An RL environment and GRPO pipeline for resolving conflicting business instructions by authority.",
+    "year": "2026",
+    "role": "Solo · Top 100 finalist, Meta × PyTorch × Hugging Face OpenEnv Hackathon",
+    "kind": "RL environment · Deterministic evaluation",
+    "highlight": "Redesigned reward, six authority rules and a fixed 600-scenario held-out test set",
+    "pipeline": [
+      "Business instructions",
+      "JSON plan",
+      "Deterministic resolver",
+      "Verifier",
+      "GRPO + LoRA"
     ],
-    result:
-      "End-to-end from PDF or text input to an appeal letter and a JSON report, with a CLI demo, a web UI and a Docker deployment path.",
-    limitations: [
-      "No labelled set of real appeal outcomes yet, so there is no accuracy number. The Judge is an LLM grading LLM output.",
-      "Regulatory knowledge is a curated module of regulations, circulars and precedents, not retrieval over the full IRDAI corpus.",
+    "stack": [
+      "Python",
+      "TRL (GRPO)",
+      "Unsloth",
+      "LoRA",
+      "Qwen2.5-3B",
+      "OpenEnv",
+      "Gradio"
     ],
-    next: [
-      "Build a small graded set of real denials and compare judge scores with human review.",
-      "Replace the curated module with retrieval over versioned official circulars.",
+    "problem": "When business instructions clash, a model must identify the real conflict, apply the right authority rule and return an executable plan. A weak reward can instead reward shortcuts, empty plans or superficial keyword matching.",
+    "approach": [
+      "Audit the original task and reward, then redesign the default generator with hidden job-title hierarchy, balanced winners, distractors and disjoint train, validation and test wording.",
+      "Use one deterministic resolver for seniority, scoped standing rules, delegation, dated supersession, conditional instructions and dependency chains. No LLM judge is used.",
+      "Score final-state correctness (45%), conflict identification (30%) and consistency (25%), multiplied by a JSON format gate. Penalize invented IDs, overlapping decisions and empty plans.",
+      "Commit a fixed, SHA-256-tracked test set of 600 scenarios across three difficulty levels. Record task, scorer, protocol and scenario-selection provenance so incompatible runs are not ranked together.",
+      "Provide CPU rule-based and cheat baselines, an OpenEnv server, a Gradio demo and GRPO/LoRA training configurations for future model evaluation."
     ],
-    links: [{ label: "Source", href: "https://github.com/Harsh-4210/Insureclear" }],
+    "result": "The redesigned task and verifier have CPU test coverage and measured rule-based and cheat baselines. No GPU training or model evaluation has been run on the new task; the historical hackathon adapter has not been re-scored.",
+    "limitations": [
+      "Historical training reward scores do not establish performance on the redesigned task.",
+      "Each episode is one prompt and one JSON answer; multi-turn, long-horizon evaluation is future work.",
+      "The scenarios are synthetic business instructions. Real-document transfer remains unmeasured."
+    ],
+    "next": [
+      "Evaluate the base model and historical adapter on the fixed test set with the same scorer and protocol.",
+      "Run fresh GRPO training and publish reproducible model results."
+    ],
+    "links": [
+      {
+        "label": "Source",
+        "href": "https://github.com/Harsh-4210/Conflict_Bench"
+      },
+      {
+        "label": "Live demo",
+        "href": "https://huggingface.co/spaces/Harsh-9209/Conflict_Bench"
+      },
+      {
+        "label": "Evaluation record",
+        "href": "https://github.com/Harsh-4210/Conflict_Bench/tree/main/results"
+      }
+    ]
+  },
+  {
+    "slug": "insureclear",
+    "title": "InsureClear",
+    "tagline": "Turn an Indian health-insurance denial and policy into an evidence-backed appeal draft for human review.",
+    "year": "2026",
+    "role": "Solo",
+    "kind": "Multi-agent LLM pipeline · Review workspace",
+    "highlight": "Versioned evidence, named accounts and exports bound to the exact human-approved revision",
+    "pipeline": [
+      "Denial + policy",
+      "Extraction",
+      "Policy + regulation",
+      "Appeal draft",
+      "Human review",
+      "Approved export"
+    ],
+    "stack": [
+      "Python",
+      "Groq",
+      "FastAPI",
+      "React",
+      "SQLite",
+      "Docker",
+      "pytest"
+    ],
+    "problem": "A denial letter mixes claim facts, policy clauses and conclusions. Preparing an appeal requires checking source evidence and regulatory applicability, then ensuring the exported letter is the version a qualified reviewer actually approved.",
+    "approach": [
+      "Accept a fictional demo, paired text or paired PDFs and track extraction, policy analysis, regulatory checking, drafting and model review in a React workspace.",
+      "Attach exact policy excerpts, source offsets, versioned regulatory references and coverage limits to the case so a reviewer can inspect the evidence behind the draft.",
+      "Keep draft revisions and reviewer decisions separate. Reviewers record facts, coverage and legal-applicability checks; later edits invalidate approval, and approved export serves only the reviewed version.",
+      "Use named accounts, organization and ownership boundaries, HTTP-only sessions, Origin and CSRF checks, bounded uploads and private no-store responses.",
+      "Run cases through a SQLite-backed queue with checkpoints, progress, bounded admission, cooperative cancellation, confined deletion and readiness checks. Groq is the documented provider; Gemini needs separate migration and qualification."
+    ],
+    "result": "A local MVP with an end-to-end case workspace and human approval workflow. The repository records 278 passing backend tests (one platform-dependent skip), 16 frontend tests and a successful production build. Private pilot acceptance remains open.",
+    "limitations": [
+      "The historical ten-case Groq baseline is a small synthetic cohort, not evidence of real appeal outcomes or final release qualification.",
+      "Final pilot acceptance still needs two fresh passing runs on the release candidate, qualified review and environment, backup and capacity checks.",
+      "The Vercel preview contains the landing page only. Connected pilot hosting and environment acceptance remain open."
+    ],
+    "next": [
+      "Complete final-candidate regression runs and qualified review on representative cases.",
+      "Verify persistent hosting, HTTPS, retention, backup recovery and pilot capacity."
+    ],
+    "links": [
+      {
+        "label": "Source",
+        "href": "https://github.com/Harsh-4210/Insureclear"
+      },
+      {
+        "label": "Pilot status",
+        "href": "https://github.com/Harsh-4210/Insureclear/blob/main/docs/PILOT_ACCEPTANCE.md"
+      }
+    ]
   },
   {
     slug: "dealflow360",
@@ -308,7 +391,7 @@ export const journey = [
     href: "https://huggingface.co/spaces/Harsh-9209/Conflict_Bench",
     time: "Apr 2026",
     detail:
-      "Built ConflictBench solo: an RL environment, a deterministic five-rubric verifier, and a GRPO-trained Qwen2.5-3B adapter published on Hugging Face.",
+      "Built ConflictBench solo for the hackathon. The task and deterministic verifier have since been redesigned; the historical adapter still needs evaluation on the new benchmark.",
   },
   {
     title: "3rd place",
